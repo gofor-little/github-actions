@@ -1,5 +1,4 @@
 name: Release
-
 on:
   workflow_call:
     inputs:
@@ -10,7 +9,6 @@ on:
     secrets:
       github-token:
         required: true
-
 jobs:
   release:
     name: Release
