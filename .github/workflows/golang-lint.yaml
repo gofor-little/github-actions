@@ -8,10 +8,6 @@ on:
         description: The version of Golang to use, defaults to '^1.17'.
         required: false
         default: ^1.19
-      test-path:
-        type: string
-        description: The path that the tests will be run from, defaults to './...'.
-        default: ./...
 
 jobs:
   lint:
