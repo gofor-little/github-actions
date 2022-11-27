@@ -1,0 +1,33 @@
+name: Release
+
+on:
+  workflow_call:
+    inputs:
+      tag:
+        type: string
+        description: The tag to create with the release.
+        required: true
+    secrets:
+      github-token:
+        required: true
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Create Tag
+        run: |
+          git tag ${{ inputs.tag }}
+          git push --tags
+      - name: Create Release
+        run: |
+          if [[ ${{ inputs.tag }} == *"v0."* ]]; then
+            gh release create ${{ inputs.tag }} --generate-notes --prerelease
+          else
+            gh release create ${{ inputs.tag }} --generate-notes
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.github-token }}
