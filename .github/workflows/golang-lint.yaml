@@ -1,14 +1,12 @@
 name: Golang Lint
-
 on:
   workflow_call:
     inputs:
       go-version:
         type: string
-        description: The version of Golang to use, defaults to '^1.17'.
+        description: The version of Golang to use, defaults to '^1.19'.
         required: false
         default: ^1.19
-
 jobs:
   lint:
     name: Lint
