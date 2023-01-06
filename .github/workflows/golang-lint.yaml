@@ -41,8 +41,12 @@ jobs:
       - name: Run GoSec (with config)
         if: ${{ inputs.gosec-args != '' }}
         uses: securego/gosec@v2.14.0
+        env:
+          GOROOT: ''
         with:
           args: ${{ inputs.gosec-args }}
       - name: Run GoSec (without args)
         if: ${{ inputs.gosec-args == '' }}
         uses: securego/gosec@master
+        env:
+          GOROOT: ''
