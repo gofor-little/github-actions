@@ -36,3 +36,11 @@ jobs:
       - name: Run GolangCI (without config)
         if: ${{ inputs.golangci-args == '' }}
         uses: golangci/golangci-lint-action@v3
+      - name: Run GoSec (with config)
+        if: ${{ inputs.gosec-args != '' }}
+        uses: securego/gosec@master
+        with:
+          args: ${{ inputs.gosec-args }}
+      - name: Run GoSec (without args)
+        if: ${{ inputs.gosec-args == '' }}
+        uses: securego/gosec@master
