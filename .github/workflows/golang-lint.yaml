@@ -40,7 +40,7 @@ jobs:
         if: ${{ inputs.gosec-args != '' }}
         uses: securego/gosec@v2.14.0
         with:
-          args: ${{ input.gosec-args }}
+          args: ${{ inputs.gosec-args }}
       - name: Run GoSec (without args)
         if: ${{ !inputs.gosec-path }}
         uses: securego/gosec@master
