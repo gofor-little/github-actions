@@ -7,6 +7,16 @@ on:
         description: The version of Golang to use, defaults to '^1.19'.
         required: false
         default: ^1.19
+      golangci-path:
+        type: string
+        description: The path to the GolangCI config file.
+        required: false
+        default: ""
+      gosec-args:
+        type: string
+        description: The args to pass to GoSec.
+        required: false
+        default: ""
 jobs:
   lint:
     name: Lint
@@ -19,18 +29,18 @@ jobs:
         with:
           go-version: ${{ inputs.go-version }}
       - name: Run GolangCI (with config)
-        if: ${{ inputs.golangci-path }}
+        if: ${{ inputs.golangci-path != "" }}
         uses: golangci/golangci-lint-action@v2
         with:
-          args: --config=.github/golangci.yaml
+          args: --config=${{ inputs.golangci-path }}
       - name: Run GolangCI (without config)
         if: ${{ !inputs.golangci-path }}
         uses: golangci/golangci-lint-action@v3
       - name: Run GoSec (with config)
-        if: ${{ inputs.gosec-path }}
+        if: ${{ inputs.gosec-args != "" }}
         uses: securego/gosec@v2.14.0
         with:
-          args: -conf .github/gosec.json ./...
-      - name: Run GoSec (without config)
+          args: ${{ input.gosec-args }}
+      - name: Run GoSec (without args)
         if: ${{ !inputs.gosec-path }}
         uses: securego/gosec@master
