@@ -34,7 +34,7 @@ jobs:
           go-version: ${{ inputs.go-version }}
       - name: Configure AWS Credentials
         if: ${{ inputs.aws-region != '' && inputs.aws-role != '' }}
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ inputs.aws-region }}
           role-to-assume: ${{ inputs.aws-role }}
