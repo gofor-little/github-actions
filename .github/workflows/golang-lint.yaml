@@ -30,12 +30,12 @@ jobs:
           go-version: ${{ inputs.go-version }}
       - name: Run GolangCI (with config)
         if: ${{ inputs.golangci-args != '' }}
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v6
         with:
           args: ${{ inputs.golangci-args }}
       - name: Run GolangCI (without config)
         if: ${{ inputs.golangci-args == '' }}
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v6
       - name: Run GoSec (with config)
         if: ${{ inputs.gosec-args != '' }}
         uses: securego/gosec@master
